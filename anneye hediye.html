@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anneye Hediye</title>
+    <style>
+        body { background-color: black; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        canvas { background-color: black; }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        
+        let i = 0;
+        function draw() {
+            if (i < 150) {
+                let hue = (0.12 - (i / 150) * 0.12) * 360;
+                ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+                ctx.lineWidth = 2;
+                
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                let dist = i * 2.8;
+                // Turtle's right(165) equivalent angle logic simplified for canvas demo
+                let angle = i * 165 * Math.PI / 180;
+                let x = dist * Math.cos(angle);
+                let y = dist * Math.sin(angle);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                
+                i++;
+                requestAnimationFrame(draw);
+            }
+        }
+        draw();
+    </script>
+</body>
+</html>
